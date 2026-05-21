@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainRoot" prefHeight="980.0" prefWidth="1200.0" styleClass="Body" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.multithreadtextanalyzer.controllers.MainController">
+
+    <left>
+        <VBox minWidth="260" prefWidth="300.0" styleClass="left-Pane" BorderPane.alignment="CENTER">
+
+            <VBox spacing="15" styleClass="left-pane-header">
+                <padding>
+                    <Insets bottom="20" left="20" right="20" top="20" />
+                </padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label styleClass="left-pane-header-ltext" text="Files" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="filesNumberLabel" styleClass="files-number" text="0 files" />
+                </HBox>
+                <Button fx:id="btnSelectFiles" maxWidth="Infinity" onAction="#onSelectFilesClicked" styleClass="select-files-btn" text="Select Files ...">
+                    <cursor><Cursor fx:constant="HAND" /></cursor>
+                </Button>
+            </VBox>
+
+            <StackPane VBox.vgrow="ALWAYS">
+                <VBox fx:id="emptyStatePane" alignment="CENTER" spacing="8">
+                    <ImageView fitHeight="160" preserveRatio="true">
+                        <image><Image url="@assets/left pannel/newleftpane.png" /></image>
+                    </ImageView>
+                    <Label text="No files selected yet." textFill="#94a3b8" />
+                </VBox>
+
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="scroll-pane-transparent">
+                    <content>
+                        <VBox fx:id="filesListContainer" spacing="8" />
+                    </content>
+                </ScrollPane>
+            </StackPane>
+
+            <VBox spacing="16" styleClass="bottom-pane" minHeight="180.0">
+                <padding>
+                    <Insets bottom="20" left="20" right="20" top="20" />
+                </padding>
+                <VBox alignment="CENTER_LEFT" spacing="5">
+                    <Label fx:id="analysisStatusLabel" styleClass="status-text" text="Ready" />
+                    <ProgressBar fx:id="analysisProgressBar" maxWidth="Infinity" progress="0.0" styleClass="custom-progress" minHeight="10.0" />
+                </VBox>
+                <Button fx:id="bottomBtnStart" maxWidth="Infinity" onAction="#onStartAnalysisClicked" styleClass="bottom-btn-start" text="Start Analysis" />
+                <Button fx:id="bottomBtnCancel" maxWidth="Infinity" onAction="#onCancelAnalysisClicked" styleClass="bottom-btn-cancel" text="Cancel All" />
+            </VBox>
+
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="20" styleClass="center-background">
+
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="20" styleClass="center-header">
+                <padding>
+                    <Insets left="40" right="40" />
+                </padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="18">
+                    <ImageView fitHeight="30" preserveRatio="true"> <image>
+                        <Image url="@assets/top/logo.png" />
+                    </image>
+                    </ImageView>
+
+                    <VBox alignment="CENTER_LEFT" spacing="2">
+                        <Label styleClass="app-title" text="MultiThreaded Text Analyzer">
+                            <font>
+                                <Font name="System Bold" size="22.0" /> </font>
+                        </Label>
+                        <Label styleClass="app-subtitle" text="Developed by Khalil and Zineddine" textFill="#64748b" />
+                    </VBox>
+                </HBox>
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <HBox alignment="CENTER" spacing="20">
+                    <HBox alignment="CENTER" spacing="10" styleClass="theme-container">
+                        <ImageView fx:id="themeIcon" fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@assets/top/dark.png" />
+                            </image>
+                        </ImageView>
+                        <ToggleButton fx:id="toggleBtn" onAction="#onToggleTheme" styleClass="toggle-btn" text="Night Mode" />
+                    </HBox>
+                </HBox>
+            </HBox>
+
+            <ScrollPane fitToWidth="true" styleClass="scroll-pane-transparent" VBox.vgrow="ALWAYS">
+                <content>
+                    <VBox spacing="25">
+                        <padding>
+                            <Insets bottom="30" left="30" right="30" top="10" />
+                        </padding>
+
+                        <VBox styleClass="dragAndDropPane">
+
+
+                            <StackPane fx:id="dragAndDropArea" prefHeight="220.0" styleClass="dragAndDropPane-Center">
+                                <VBox.margin>
+                                    <Insets bottom="15" left="15" right="15" top="15" />
+                                </VBox.margin>
+                                <VBox alignment="CENTER" spacing="10">
+                                    <ImageView fitHeight="50.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@assets/right pannel/drag-and-drop.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Label styleClass="dragAndDropPane-Center-Text" text="Drag &amp; drop files here" />
+                                    <Label styleClass="dragAndDropPane-Center-p" text="or paste text content directly" />
+                                </VBox>
+                            </StackPane>
+                        </VBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                            <Label styleClass="analysis-result-title" text="Analysis Results" />
+                            <Region HBox.hgrow="ALWAYS" />
+                     <Button mnemonicParsing="false" styleClass="clear-btn" onAction="#clearAnalysisUI" text="Clear" />
+                            <Button onAction="#handleExport" maxHeight="38.0" maxWidth="86.0" minHeight="38.0" minWidth="86.0" styleClass="word-button" text="TXT">
+                                <graphic>
+                                    <ImageView fitHeight="100.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@assets/right pannel/export.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button onAction="#exportToPDF" maxHeight="38.0" maxWidth="86.0" minHeight="38.0" minWidth="86.0" styleClass="word-button" text="PDF">
+                                <graphic>
+                                    <ImageView fitHeight="100.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@assets/right pannel/export.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button onAction="#exportToWord" maxHeight="38.0" maxWidth="86.0" minHeight="38.0" minWidth="86.0" styleClass="word-button" text="WORD">
+                                <graphic>
+                                    <ImageView fitHeight="100.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@assets/right pannel/export.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </HBox>
+
+                        <GridPane hgap="20" vgap="20">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="ALWAYS" minWidth="150" percentWidth="25" />
+                                <ColumnConstraints hgrow="ALWAYS" minWidth="150" percentWidth="25" />
+                                <ColumnConstraints hgrow="ALWAYS" minWidth="150" percentWidth="25" />
+                                <ColumnConstraints hgrow="ALWAYS" minWidth="150" percentWidth="25" />
+                            </columnConstraints>
+
+                            <VBox styleClass="words-pane" GridPane.columnIndex="0">
+                                <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                                <ImageView fitHeight="40" fitWidth="40" preserveRatio="true"><Image url="@assets/right pannel/total-words.png" /></ImageView>
+                                <Label fx:id="totalWordsLabel" styleClass="words-pane-number" text="0" />
+                                <Label styleClass="words-pane-title" text="Total words" />
+                            </VBox>
+
+                            <VBox styleClass="words-pane" GridPane.columnIndex="1">
+                                <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                                <ImageView fitHeight="40" fitWidth="40" preserveRatio="true"><Image url="@assets/right pannel/unique-words.png" /></ImageView>
+                                <Label fx:id="uniqueWordsLabel" styleClass="words-pane-number" text="0" />
+                                <Label styleClass="words-pane-title" text="Unique Words" />
+                            </VBox>
+
+                            <VBox styleClass="words-pane" GridPane.columnIndex="2">
+                                <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                                <ImageView fitHeight="40" fitWidth="40" preserveRatio="true"><Image url="@assets/right pannel/sentences.png" /></ImageView>
+                                <Label fx:id="sentencesLabel" styleClass="words-pane-number" text="0" />
+                                <Label styleClass="words-pane-title" text="Sentences" />
+                            </VBox>
+
+                            <VBox styleClass="words-pane" GridPane.columnIndex="3">
+                                <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                                <ImageView fitHeight="40" fitWidth="40" preserveRatio="true"><Image url="@assets/right pannel/paragraphs.png" /></ImageView>
+                                <Label fx:id="paragraphsLabel" styleClass="words-pane-number" text="0" />
+                                <Label styleClass="words-pane-title" text="Paragraphs" />
+                            </VBox>
+
+                            <VBox styleClass="words-pane" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                                <ImageView fitHeight="40" fitWidth="40" preserveRatio="true"><Image url="@assets/right pannel/reading-time.png" /></ImageView>
+                                <Label styleClass="readingtime-pane" text="Reading Time" />
+                                <Label styleClass="readingtime2-pane" text="Estimated duration" />
+                                <Label fx:id="readingTimeLabel" styleClass="readingtime3-pane" text="0 min" />
+                            </VBox>
+
+                            <VBox styleClass="words-pane" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                                <ImageView fitHeight="40" fitWidth="40" preserveRatio="true"><Image url="@assets/right pannel/proccessing-time.png" /></ImageView>
+                                <Label styleClass="readingtime-pane" text="Processing Time" />
+                                <Label styleClass="readingtime2-pane" text="Analysis duration" />
+                                <Label fx:id="processingTimeLabel" styleClass="readingtime3-pane" text="0 Sec" />
+                            </VBox>
+                            <rowConstraints>
+                                <RowConstraints />
+                                <RowConstraints />
+                            </rowConstraints>
+                        </GridPane>
+
+                        <VBox spacing="15">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label styleClass="analysis-result-title" text="Per-File Results" />
+
+                            </HBox>
+
+                            <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="200.0" styleClass="scroll-pane-transparent" vbarPolicy="NEVER">
+                                <content>
+                                    <HBox fx:id="perFileResultsContainer" spacing="15" style="-fx-padding: 5;">
+                                    </HBox>
+                                </content>
+                            </ScrollPane>
+                        </VBox>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <right>
+        <VBox maxWidth="400" minWidth="193.0" prefHeight="800.0" prefWidth="312.0" spacing="20" styleClass="right-pane" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="30" />
+            </padding>
+
+            <VBox alignment="CENTER" spacing="10" styleClass="file-encoding">
+                <padding><Insets bottom="20" top="20" /></padding>
+                <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true"><Image url="@assets/right pannel/file-encoding.png" /></ImageView>
+                <Label styleClass="file-encoding-text" text="File-encoding" />
+                <Label fx:id="fileEncodingLabel" styleClass="file-encoding-value" text="N/A" />
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="10" styleClass="file-encoding">
+                <padding><Insets bottom="20" top="20" /></padding>
+                <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true"><Image url="@assets/right pannel/language.png" /></ImageView>
+                <Label styleClass="file-encoding-text" text="Language" />
+                <Label fx:id="languageLabel" styleClass="file-encoding-value" text="N/A" />
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="10" styleClass="file-encoding">
+                <padding><Insets bottom="20" top="20" /></padding>
+                <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true"><Image url="@assets/right pannel/comprission-ratio.png" /></ImageView>
+                <Label styleClass="file-encoding-text" text="Compression Ratio" />
+                <Label fx:id="compressionRatioLabel" styleClass="file-encoding-value" text="N/A" />
+            </VBox>
+
+            <VBox spacing="8" styleClass="file-encoding" VBox.vgrow="ALWAYS">
+                <padding><Insets left="20" right="20" top="20" bottom="20" /></padding>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                        <Image url="@assets/right pannel/most-frequent.png" />
+                    </ImageView>
+                    <Label styleClass="file-encoding-text" text="Most Frequent Terms" />
+                </HBox>
+
+                <ScrollPane fitToWidth="true"
+                            hbarPolicy="NEVER"
+                            vbarPolicy="AS_NEEDED"
+                            styleClass="scroll-pane-transparent"
+                            VBox.vgrow="ALWAYS"
+
+                           >
+                    <content>
+                        <VBox fx:id="frequentTermsContainer"
+                              spacing="8"
+                              styleClass="frequent-terms-background"
+                              >
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </VBox>
+        </VBox>
+    </right>
+
+</BorderPane>
