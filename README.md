@@ -153,7 +153,8 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
  
 ## 👥 Authors
  
-**Khalil Khalfi** • **Zin Eddine Boudersa** • Group: G01
+**Khalil Khalfi** • 
+**Zin Eddine Boudersa** •
  
 ---
  
