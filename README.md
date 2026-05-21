@@ -1,3 +1,5 @@
+
+
 # 📊 MultiThreaded Text Analyzer
  
 [![Java Version](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
@@ -8,7 +10,11 @@
 > A highly responsive, multithreaded desktop application built with JavaFX for analyzing text, documents, and code files. Extract metrics, visualize data, and export your reports seamlessly.
  
 ### 🔗 Live Demo
-**[Insert link to your Live Demo, Video Walkthrough, or GIF here]**
+
+
+https://github.com/user-attachments/assets/017d46a9-2f03-44d9-a661-c7341440d456
+
+
  
 ---
  
